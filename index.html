@@ -11,6 +11,14 @@
       .mandala {
 	      position: relative;
       }
+      @keyframes rotate {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(359deg);
+        }
+      }
       .mandala * {
         border-radius: 50%;
 	      width: 50vmin;
@@ -20,98 +28,59 @@
 	      left: 0;
         transform-origin: 50% 75%;
 	      filter: opacity(20%);
+	      animation: 9s linear rotate infinite;
+      }
+      .mandala *:nth-child(odd) {
+        animation-direction: reverse;
       }
       .s0 {
         background-color: #C62828;
-        transform: rotate(0deg);
       }
       .s1 {
         background-color: #F44336;
-        transform: rotate(30deg);
+        animation-delay: -750ms;
       }
       .s2 {
         background-color: #FF6F00;
-        transform: rotate(60deg);
+        animation-delay: -1500ms;
       }
       .s3 {
         background-color: #F4D03F;
-        transform: rotate(90deg);
+        animation-delay: -2250ms;
       }
       .s4 {
         background-color: #8BC34A;
-        transform: rotate(120deg);
+        animation-delay: -3000ms;
       }
       .s5 {
         background-color: #2E7D32;
-        transform: rotate(150deg);
+        animation-delay: -3750ms;
       }
       .s6 {
         background-color: #26A69A;
-        transform: rotate(180deg);
+        animation-delay:-4500ms;
       }
       .s7 {
         background-color: #00897B;
-        transform: rotate(210deg);
+        animation-delay: -5250ms;
       }
       .s8 {
         background-color: #1565C0;
-        transform: rotate(240deg);
+        animation-delay: -6000ms;
       }
       .s9 {
         background-color: #7E57C2;
-        transform: rotate(270deg);
+        animation-delay: -6750ms;
       }
       .s10 {
         background-color: #880E4F;
-        transform: rotate(300deg);
+        animation-delay: -7500ms;
       }
       .s11 {
         background-color: #3949AB;
-        transform: rotate(330deg);
+        animation-delay: -8250ms;
       }
     </style>
-    <script>
-      (function (d, degsPerFrame, delay, className) {
-        var angles = [];
-
-        function getOffset(i) {
-          return angles.length <= i ? i * 30 : angles[i];
-        }
-
-        function putOffset(i, angle) {
-          if (angles.length <= i) {
-            angles.push(angle);
-          } else {
-            angles[i] = angle;
-          }
-        }
-
-        function animate(i, node) {
-          var angle = getOffset(i);
-          angle += i % 2 == 0 ? degsPerFrame : -degsPerFrame;
-          angle = angle >= 0 ? angle % 360 : angle + 360;
-          putOffset(i, angle);
-          node.style.transform = 'rotate(' + angle + 'deg)';
-        }
-
-        function doAnimation() {
-          var parent = d.getElementsByClassName(className)[0];
-          var children = parent.children;
-          return function () {
-            var i;
-            for (i = 0; i < children.length; ++i) {
-              animate(i, children[i]);
-            }
-          }
-        }
-
-        d.onreadystatechange = function () {
-          if (d.readyState === 'interactive') {
-            setInterval(doAnimation(), delay);
-          }
-        };
-      }(document, 1, 25, 'mandala'));
-    </script>
   </head>
   <body>
     <div class="mandala">
